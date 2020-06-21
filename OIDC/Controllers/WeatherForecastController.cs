@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace OIDC.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -24,8 +24,22 @@ namespace OIDC.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("WeatherForecastFree")]
+        public IEnumerable<WeatherForecast> GetFree()
+        {
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Summary = Summaries[rng.Next(Summaries.Length)]
+            })
+            .ToArray();
+        }
+
+        [Authorize]
+        [HttpGet("WeatherForecastAuth")]
+        public IEnumerable<WeatherForecast> GetAuth()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

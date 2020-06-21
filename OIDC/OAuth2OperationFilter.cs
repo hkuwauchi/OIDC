@@ -27,8 +27,8 @@ namespace OIDC
 
             operation.Security.Add(new OpenApiSecurityRequirement()
             {
-                [oauth2SecurityScheme] = new[] { "thecodebuzz" } //'thecodebuzz' is scope here
-
+                //[oauth2SecurityScheme] = new[] { "thecodebuzz" } //'thecodebuzz' is scope here
+                [oauth2SecurityScheme] = new[] { "master-realm", "account" }
             });
 
         }

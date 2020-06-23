@@ -34,7 +34,7 @@ namespace OIDC
 
             string url = $"http://share-ubuntu:8080/auth/realms/{Configuration["Keycloak:Realm"]}/protocol/openid-connect/auth";
 
-            var cert = new X509Certificate2(Path.Combine(Environment.ContentRootPath, "keycloak.pfx"), "");
+            var cert = new X509Certificate2(Path.Combine(Environment.ContentRootPath, "keycloak.crt"), "");
             X509SecurityKey key = new X509SecurityKey(cert);
             SigningCredentials credentials = new SigningCredentials(key, "RS256");
 

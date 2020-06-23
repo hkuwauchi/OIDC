@@ -2,15 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -34,6 +31,7 @@ namespace OIDC
 
             string url = $"http://share-ubuntu:8080/auth/realms/{Configuration["Keycloak:Realm"]}/protocol/openid-connect/auth";
 
+            //èÿñæèëÇÃÇŸÇ§ÇæÇ¡ÇΩ
             var cert = new X509Certificate2(Path.Combine(Environment.ContentRootPath, "keycloak.crt"), "");
             X509SecurityKey key = new X509SecurityKey(cert);
             SigningCredentials credentials = new SigningCredentials(key, "RS256");
